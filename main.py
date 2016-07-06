@@ -8,6 +8,7 @@ ConPass = input("Do you want to configuere the console password?: ").lower()
 SshPass = input("Do you want to configure the Telnet / SSH password?: ").lower()
 
 # What the else statements do is if the user did not say yes it does a comment in the Cisco IOS
+# testing
 if ConfIP == "yes":
     port = input("What is the port?: ")
     outIP = input("What should the outside IP be?: ")
