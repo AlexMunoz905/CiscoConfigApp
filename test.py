@@ -1,5 +1,4 @@
 outip = '5.5.5.5'
-
 num = outip.count('.')
 
 if num > 3:
