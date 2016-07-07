@@ -2,5 +2,5 @@ DONE: 1. Enable password
 DONE: 2. Console password
 DONE: 3. Telnet / SSH password
 DONE: 4. IP address for outside
- 5. IP address for inside range
+5. IP address for inside range
 

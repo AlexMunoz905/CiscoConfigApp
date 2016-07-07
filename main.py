@@ -32,6 +32,8 @@ if SshPass == "yes":
 else:
     TelnetPass = "!"
 
+
+
 # DEBUG
 print("\nThe config: \n!")
 testConfig = "interface " + port + "\nip address " + outIP + " " + subnetMask + "\n!\nenable password " + enablePass + "\nline vty 0 " + ConsolePass + "\nline vty 0 4 " + TelnetPass
