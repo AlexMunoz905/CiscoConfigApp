@@ -5,7 +5,7 @@ import ipaddress
 
 # GLOBAL FUNCS
 def errorfunc():
-    outIP = input("What should the toutside IP be?: ")
+    outIP = input("What should the outside IP be?: ")
 
     IpError = outIP.count('.')
 
