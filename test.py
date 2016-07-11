@@ -1,13 +1,22 @@
-outip = input("Would you like to configure the IP?: ").lower()
+def fuckfunc():
+    outIP = input("What is your IP?: ")
 
-ipadd = "ip address "
+    IpError = outIP.count('.')
 
-if outip == "yes":
-    outsideIP = input("What should the IP be?: ")
-    subnetMask = input("What should the subnet mask be?: ")
+    if IpError == 3:
+        print("Good IP")
+    else:
+        fuckfunc()
+
+
+
+outIP = input("What is your IP?: ")
+
+IpError = outIP.count('.')
+
+if IpError == 3:
+    print("Good IP")
 else:
-    ipadd = "!"
-    subnetMask = "!NO SUBNET WAS CHOSEN"
-    outsideIP = "NO IP WAS CHOSEN\n"
+    fuckfunc()
 
-print("\nint f0/1\n" + ipadd + outsideIP + " " + subnetMask)
+print("\nPORT: f0/1\n IP ", outIP + "\n")

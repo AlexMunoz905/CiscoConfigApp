@@ -1,5 +1,21 @@
 # Cisco config app
 
+# IMPORTS
+import ipaddress
+
+# GLOBAL FUNCS
+def errorfunc():
+    outIP = input("What should the toutside IP be?: ")
+
+    IpError = outIP.count('.')
+
+    if IpError == 3:
+        print("Good IP")
+    else:
+        errorfunc()
+
+
+
 # GLOABL VARIABLES
 IpAdd = "ip address "
 inter = "interface "
@@ -19,19 +35,24 @@ SshPass = input("Do you want to configure the Telnet / SSH password?: ").lower()
 if ConfIP == "yes":
     port = input("What is the port?: ")
     outIP = input("What should the outside IP be?: ")
-    # Counts the number of dots in the IP, should be 3
-    IpError = outIP.count('.')
-    # The if statement see's how many dots there are
-    if IpError > 3:
-        print("Please enter a valid IP address")
-        ourIP = input("What should the outside IP be?: ")
+
+    ipaddress.ip_address(outIP)
+
+    # IpError = outIP.count('.')
+    #
+    # if IpError == 3:
+    #     print("Good IP")
+    # else:
+    #     errorfunc()
 
     subnetMask = input("What is the subnet mask?: ")
     SubnetError = subnetMask.count('.')
 
-    if SubnetError > 3:
-        print("Please enter a valid subnet mask")
-        subnetMask = input("What is the subnet mask?: ")
+    ipaddress.ip_address(subnetMask)
+
+    # if SubnetError > 3:
+    #     print("Please enter a valid subnet mask")
+    #     subnetMask = input("What is the subnet mask?: ")
 
 else:
    inter = "!"
