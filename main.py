@@ -1,5 +1,29 @@
 # Cisco config app
 
+# IMPORTS
+import ipaddress
+
+# GLOBAL FUNCS
+def errorfunc():
+    outIP = input("What should the outside IP be?: ")
+
+    IpError = outIP.count('.')
+
+    if IpError == 3:
+        print("Good IP")
+    else:
+        errorfunc()
+
+
+
+# GLOABL VARIABLES
+IpAdd = "ip address "
+inter = "interface "
+enpassword = "enable password "
+ConPassword = "line vty 0 "
+SshPassword = "line vty 0 4 "
+
+
 # Gets the questions done so we can then know what they need to configure
 # .lower() sets the answers to all lowercase
 ConfIP = input("Do you want to configure the IP?: ").lower()
@@ -11,30 +35,55 @@ SshPass = input("Do you want to configure the Telnet / SSH password?: ").lower()
 if ConfIP == "yes":
     port = input("What is the port?: ")
     outIP = input("What should the outside IP be?: ")
+
+    ipaddress.ip_address(outIP)
+
+    # IpError = outIP.count('.')
+    #
+    # if IpError == 3:
+    #     print("Good IP")
+    # else:
+    #     errorfunc()
+
     subnetMask = input("What is the subnet mask?: ")
+    SubnetError = subnetMask.count('.')
+
+    ipaddress.ip_address(subnetMask)
+
+    # if SubnetError > 3:
+    #     print("Please enter a valid subnet mask")
+    #     subnetMask = input("What is the subnet mask?: ")
+
 else:
-    port = "!"
-    outIP = "!"
-    subnetMask = "!"
+   inter = "!"
+   port = "NO PORT WAS CONFIGURED"
+   outIP = " WAS"
+   IpAdd = "!NO IP"
+   subnetMask = "CONFIGURED"
 
 if EnPass == "yes":
     enablePass = input("What should the enable password be?: ")
 else:
-    enablePass = "!"
+    enpassword = "!"
+    enablePass = "ENABLE PASSWORD WAS NOT CHOSEN"
 
 if ConPass == "yes":
     ConsolePass = input("What should the console password be?: ")
 else:
-    ConsolePass = "!"
+    ConPassword = "!"
+    ConsolePass = "CONSOLE PASSWORD WAS NOT CHOSEN"
 
 if SshPass == "yes":
     TelnetPass = input("What should the Telnet / SSH password be?: ")
 else:
-    TelnetPass = "!"
+    SshPassword = "!"
+    TelnetPass = "SSH / TELNET PASSWORD WAS NOT CHOSEN"
+
+
 
 # DEBUG
 print("\nThe config: \n!")
-testConfig = "interface " + port + "\nip address " + outIP + " " + subnetMask + "\n!\nenable password " + enablePass + "\nline vty 0 " + ConsolePass + "\nline vty 0 4 " + TelnetPass
+testConfig = inter + port + "\n" + IpAdd + outIP + " " + subnetMask + "\n!\n" + enpassword + enablePass + "\n" + ConPassword + ConsolePass + "\n" + SshPassword + TelnetPass
 print(testConfig)
 
 # Base config
