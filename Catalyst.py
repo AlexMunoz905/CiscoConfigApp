@@ -30,6 +30,8 @@ ConfIP = input("Do you want to configure the IP?: ").lower()
 EnPass = input("Do you want to configure the enable password?: ").lower()
 ConPass = input("Do you want to configuere the console password?: ").lower()
 SshPass = input("Do you want to configure the Telnet / SSH password?: ").lower()
+Layer3Switch = input("Type yes for Layer 3 switch: ").lower()
+VTPmode = input("Type yes for VTP client mode, anything else will be transparent mode: ").lower()
 
 # What the else statements do is if the user did not say yes it does a comment in the Cisco IOS
 if ConfIP == "yes":
@@ -79,17 +81,38 @@ else:
     SshPassword = "!"
     TelnetPass = "SSH / TELNET PASSWORD WAS NOT CHOSEN"
 
+if Layer3Switch == "yes":
+    L3Route = input("What is the Default Gateway? ")
+else:
+    L2Route = input("What is the Default Gateway? ")
 
+hostname = input("What is the hostname? ")
+
+domainname = input("What is the domain name? ")
 
 # DEBUG
 print("\nThe config: \n!")
 testConfig = inter + port + "\n" + IpAdd + outIP + " " + subnetMask + "\n!\n" + enpassword + enablePass + "\n" + ConPassword + ConsolePass + "\n" + SshPassword + TelnetPass
 print(testConfig)
 
+# Start config
+print ("hostname " + hostname)
+print ("ip domain-name " + domainname)
+
+if VTPmode == "yes":
+    print ("vtp mode client")
+else:
+    print ("vtp mode transparent")
+
 # Base config
+
 print("service tcp-keepalives-in")
 print("service tcp-keepalives-out")
 print("service timestamps debug datetime msec localtime show-timezone")
 print("service timestamps log datetime msec localtime show-timezone")
 print("service password-encryption")
 print("service sequence-numbers")
+print("exception crashinfo maximum files 2")
+print("warm-reboot count 10 uptime 5")
+print("")
+
