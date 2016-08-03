@@ -33,6 +33,7 @@ SshPassword = "line vty 0 4 "
 print ("\n")
 Layer3Switch = input("Type yes for Layer 3 switch, anything else will be Layer 2: ").lower()
 VTPmode = input("Type yes for VTP client mode, anything else will be transparent mode: ").lower()
+SNMPCom = input("Adding SNMP Community?: ").lower()
 
 # What the else statements do is if the user did not say yes it does a comment in the Cisco IOS
 # if ConfIP == "yes":
@@ -104,6 +105,14 @@ SubnetError = subnetMask.count('.')
 
 ipaddress.ip_address(subnetMask)
 
+# print ("ip address " + MngtIP + subnetMask)
+if Layer3Switch == "yes":
+    L3Route = input("What is the Default Gateway? ")
+else:
+    L2Route = input("What is the Default Gateway? ")
+
+if SNMPCom == "yes":
+    SNMPCommunity = input("What should the SNMP Community be?: ")
 
 # DEBUG
 print("\nThe config: \n!")
@@ -124,23 +133,17 @@ print ("vtp password "+ VTPpass)
 print ("vlan " + MngtVLAN)
 print ("name " + MngtVLANname)
 print ("interface vlan " + MngtVLAN)
-print ("ip address " + MngtIP + subnetMask)
+print ("ip address " + MngtIP + " " + subnetMask)
 if Layer3Switch == "yes":
-    L3Route = input("What is the Default Gateway? ")
     print ("ip route 0.0.0.0 0.0.0.0 " + L3Route)
+    print ("ip routing")
 else:
-    L2Route = input("What is the Default Gateway? ")
     print ("ip default-gateway " + L2Route)
+    print ("no ip routing")
+if SNMPCom == "yes":
+    print ("snmp-server community "+ SNMPCommunity)
 
 # Base config
 
-print("service tcp-keepalives-in")
-print("service tcp-keepalives-out")
-print("service timestamps debug datetime msec localtime show-timezone")
-print("service timestamps log datetime msec localtime show-timezone")
-print("service password-encryption")
-print("service sequence-numbers")
-print("exception crashinfo maximum files 2")
-print("warm-reboot count 10 uptime 5")
-print("")
+import base-cat
 
