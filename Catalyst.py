@@ -2,7 +2,7 @@
 
 # IMPORTS
 import ipaddress
-
+import basecat
 # GLOBAL FUNCS
 def errorfunc():
     MngtIP = input("What should the IP be?: ")
@@ -143,7 +143,7 @@ else:
 if SNMPCom == "yes":
     print ("snmp-server community "+ SNMPCommunity)
 
-# Base config
-
-import base-cat
-
+if 6==6:
+    import basecat
+    from basecat import ourfunctionsucks
+    ourfunctionsucks()
