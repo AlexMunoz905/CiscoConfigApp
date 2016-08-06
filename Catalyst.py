@@ -143,7 +143,17 @@ else:
 if SNMPCom == "yes":
     print ("snmp-server community "+ SNMPCommunity)
 
+<<<<<<< Updated upstream
 if 6==6:
     import basecat
     from basecat import ourfunctionsucks
     ourfunctionsucks()
+=======
+# Base config
+
+file = open("base-cat.py","r")
+
+for line in file:
+    print file.read()
+
+>>>>>>> Stashed changes
